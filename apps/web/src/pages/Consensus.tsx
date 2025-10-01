@@ -36,20 +36,20 @@ export default function Consensus() {
     run();
   }, []);
 
-  if (!result) return <div style={{ padding: 24 }}>Computing pick…</div>;
+  if (!result) return <div className="p-6">Computing pick…</div>;
 
   return (
-    <div style={{ display: 'grid', placeItems: 'center', height: '70vh', padding: 16 }}>
-      <div style={{ textAlign: 'center' }}>
-        <h2>Your Quick Pick: {result.title} 🎉</h2>
-        <p style={{ maxWidth: 520, margin: '8px auto' }}>{result.why}</p>
+    <div className="grid place-items-center min-h-[70vh] p-4">
+      <div className="text-center">
+        <h2 className="text-2xl font-semibold">Your Quick Pick: {result.title} 🎉</h2>
+        <p className="max-w-[520px] mx-auto mt-2 text-gray-700">{result.why}</p>
         {result.playUrl && (
-          <p>
-            <a href={result.playUrl} target="_blank" rel="noreferrer">Play</a>
+          <p className="mt-3">
+            <a className="px-3 py-2 rounded-md bg-brand text-white hover:bg-brand-600" href={result.playUrl} target="_blank" rel="noreferrer">Play</a>
           </p>
         )}
         {result.backups.length > 0 && (
-          <p>Backups: {result.backups.join(', ')}</p>
+          <p className="mt-2 text-sm text-gray-600">Backups: {result.backups.join(', ')}</p>
         )}
       </div>
     </div>

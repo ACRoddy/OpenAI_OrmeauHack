@@ -28,9 +28,13 @@ supabase/
 backend/
   logic/fusion.ts    # taste vector merge + shortlist scoring helpers
   ai/quickPickStub.ts# AI stub: pick + backups + explanation
+  data/dummyMovies.ts# demo dataset for No‑DB & web
 scripts/
   bootstrap.sh       # sanity checks and next steps
 env.sample.txt       # if .env files are blocked in VCS, copy to .env.local
+apps/
+  web/               # Vite + React web app (Login → Group → Swipe → Consensus)
+  choice-engine/     # Expo app (optional)
 ```
 
 ## Quickstart (10 minutes)
@@ -59,6 +63,19 @@ If you want persistence and realtime:
 1) Create a Supabase project and copy creds
 2) Apply schema + seed via SQL editor using `supabase/schema.sql` and `supabase/seed.sql`
 3) Add Supabase client to the app and replace dummy reads with queries
+
+## Web Quick Start (Vite + React)
+```
+cd apps/web
+npm install
+npm run dev
+# open http://localhost:5173
+```
+Routes:
+- / → Login
+- /group → Group lobby (stub)
+- /swipe → Swipe cards using dummy data
+- /consensus → Quick Pick + backups + why (AI stub)
 
 ## Troubleshooting
 - npm ENOENT package.json at repo root: run npm inside the Expo app folder (`apps/choice-engine`).

@@ -34,26 +34,36 @@ env.sample.txt       # if .env files are blocked in VCS, copy to .env.local
 ```
 
 ## Quickstart (10 minutes)
-1) Create a Supabase project and copy creds
-- Duplicate `.env.example` → `.env.local` and fill: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `TMDB_API_KEY` (optional for online fetch), `OPENAI_API_KEY` (optional).
+1) No‑DB Mode (fastest): use dummy data
+- Skip Supabase entirely. The template screens read from `backend/data/dummyMovies.ts`.
 
-2) Apply schema + seed
+2) Mobile app (already included — install and run)
 ```
-psql "$SUPABASE_DB_URL" -f supabase/schema.sql
-psql "$SUPABASE_DB_URL" -f supabase/seed.sql
+# from repo root
+cd apps/choice-engine
+
+# install dependencies (first time only)
+npm install
+
+# run the app
+npm run start
+# press i (iOS) or a (Android) or scan QR with Expo Go
 ```
-Or paste both files into Supabase SQL editor and run.
 
-3) Mobile app (to be created by Dev 1)
-- Initialize Expo app in a sibling folder or inside `apps/mobile` (not in this scaffold yet):
-  - `npx create-expo-app@latest` → choose TypeScript
-  - Install: `@supabase/supabase-js`, `react-native-deck-swiper`, `nativewind`, `react-native-svg`
-  - Add screens: Login, GroupLobby, Swipe, Consensus
-  - Wire Supabase Auth (email/magic link), use Realtime for group presence
-
-4) Fusion + AI wiring
+3) Fusion + AI wiring
 - Import `backend/logic/fusion.ts` in the mobile app (or replicate logic in-app)
 - Call `backend/ai/quickPickStub.ts` for a fast demo if OpenAI not configured
+
+### Optional: Supabase Mode
+If you want persistence and realtime:
+1) Create a Supabase project and copy creds
+2) Apply schema + seed via SQL editor using `supabase/schema.sql` and `supabase/seed.sql`
+3) Add Supabase client to the app and replace dummy reads with queries
+
+## Troubleshooting
+- npm ENOENT package.json at repo root: run npm inside the Expo app folder (`apps/choice-engine`).
+- iOS simulator not launching: open Xcode → install Command Line Tools; or use Expo Go on device.
+- Android emulator not found: open Android Studio → start an AVD; then press `a` in Expo CLI.
 
 ## Data Shapes (Guidelines)
 Genres vector example (normalized floats 0..1):
